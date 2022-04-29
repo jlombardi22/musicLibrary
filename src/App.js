@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Songs from "./components/SongForm/AddSongsForm";
 import MusicTable from "./components/DisplaySong/MusicTable";
+import NavBar from "./components/NavBar/NavBar";
 import axios from "axios";
 
 function App() {
   const [songs, setSongs] = useState([]);
-  // function addNewSong(song) {
-  //   let composeSong = [song, ...songs];
-  //   setSongs(composeSong);
-  // }
+
   useEffect(() => {
     getAllSongs();
   }, []);
@@ -24,15 +22,6 @@ function App() {
     }
   }
   async function addNewSong(newSong) {
-    // let composeSong = [newSong, ...songs];
-    // setSongs(composeSong);
-    // newSong: {
-    //   title:;
-    //   album: "";
-    //   artist: "";
-    //   genre: "";
-    //   releaseDate: "";
-    // }
     let response = await axios.post("http://127.0.0.1:8000/music/", newSong);
     if (response.status === 201) {
       await getAllSongs();
@@ -40,8 +29,11 @@ function App() {
   }
   return (
     <div>
-      <Songs addNewSong={addNewSong} />
-      <MusicTable postMade={songs} />
+      <NavBar />
+      <div>
+        <Songs addNewSong={addNewSong} />
+        <MusicTable postMade={songs} />
+      </div>
     </div>
   );
 }
