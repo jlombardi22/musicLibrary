@@ -6,10 +6,10 @@ import axios from "axios";
 
 function App() {
   const [songs, setSongs] = useState([]);
-  function addNewSong(song) {
-    let composeSong = [song, ...songs];
-    setSongs(composeSong);
-  }
+  // function addNewSong(song) {
+  //   let composeSong = [song, ...songs];
+  //   setSongs(composeSong);
+  // }
   useEffect(() => {
     getAllSongs();
   }, []);
@@ -18,11 +18,21 @@ function App() {
     try {
       let response = await axios.get("http://127.0.0.1:8000/music/");
       setSongs(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log("Error in makeGetRequest API call!");
     }
   }
   async function addNewSong(newSong) {
+    // let composeSong = [newSong, ...songs];
+    // setSongs(composeSong);
+    // newSong: {
+    //   title:;
+    //   album: "";
+    //   artist: "";
+    //   genre: "";
+    //   releaseDate: "";
+    // }
     let response = await axios.post("http://127.0.0.1:8000/music/", newSong);
     if (response.status === 201) {
       await getAllSongs();
@@ -30,7 +40,7 @@ function App() {
   }
   return (
     <div>
-      <Songs addSong={addNewSong} />
+      <Songs addNewSong={addNewSong} />
       <MusicTable postMade={songs} />
     </div>
   );

@@ -5,7 +5,7 @@ const AddSongForm = props => {
   const [artist, setArtist] = useState("");
   const [album, setAlbum] = useState("");
   const [genre, setGenre] = useState("");
-  const [releaseDate, setReleaseDate] = useState("");
+  // const [releaseDate, setReleaseDate] = useState("");
 
   function handlesubmit(e) {
     e.preventDefault();
@@ -13,10 +13,11 @@ const AddSongForm = props => {
       title: title,
       artist: artist,
       album: album,
+      // releaseDate: releaseDate,
       genre: genre,
     };
     console.log(newSong);
-    // props.addNewSong(newSong);
+    props.addNewSong(newSong);
   }
 
   return (
@@ -52,14 +53,14 @@ const AddSongForm = props => {
             onChange={e => setGenre(e.target.value)}
             aria-label="default input example"
           ></input>
-          <input
+          {/* <input
             className="form-control"
-            type="text"
+            type="date"
             placeholder="release date"
             value={releaseDate}
             onChange={e => setReleaseDate(e.target.value)}
             aria-label="default input example"
-          ></input>
+          ></input> */}
           <button type="submit" className="btn btn-secondary">
             Add Song
           </button>
